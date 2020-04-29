@@ -1,6 +1,9 @@
 FROM ubuntu:18.04
 
-RUN apt-get update -q && apt-get install -qy --no-install-recommends openssh-server wget zip tar gzip bzip2 unrar p7zip
+RUN apt-get update -q && \
+        apt-get install -qy --no-install-recommends openssh-server wget zip tar gzip bzip2 unrar p7zip netcat && \
+        rm -rf /var/lib/apt/lists/*
+
 RUN mkdir /var/run/sshd
 
 RUN echo 'root:root' | chpasswd
@@ -18,8 +21,7 @@ RUN wget -q --no-check-certificate -O /tmp/docker.tgz https://download.docker.co
         rm -r docker && \
         chmod +x /bin/docker
 
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN rm -rf /tmp/* /var/tmp/*
 
 EXPOSE 22
 
