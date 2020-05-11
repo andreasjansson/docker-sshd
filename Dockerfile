@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+LABEL has_docker=true
+
 RUN apt-get update -q && \
         apt-get install -qy --no-install-recommends openssh-server wget zip tar gzip bzip2 unrar p7zip netcat && \
         rm -rf /var/lib/apt/lists/*
